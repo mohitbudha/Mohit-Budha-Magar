@@ -16,33 +16,22 @@ import AdminContact from "./Admin/adminContact";
 
 
 function App() {
-  // const [projects, setProjects] = useState([]);
-  const isLoggedIn = !!localStorage.getItem("token"); // Check token in localStorage
 
-  // const handleProjectAdded = (newProject) => {
-  //   setProjects((prev) => [...prev, newProject]);
-  // };
-
-  const handleLoginSuccess = (token) => {
-    localStorage.setItem("token", token);
-    window.location.href = "/admin"; // Redirect after login
+  const ProtectedRoute = ({ children }) => {
+    const isLoggedIn = !!localStorage.getItem("token");
+    return isLoggedIn ? children : <Navigate to="/login" replace />;
   };
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   window.location.href = "/admin"; // Redirect to login page after logout
-  // };
-
-  // ✅ Protected Route Wrapper
-  const ProtectedRoute = ({ children }) => {
-    return isLoggedIn ? children : <Navigate to="/login" replace />;
+  const handleLoginSuccess = () => {
+    window.location.href = "/admin";
   };
 
   return (
     <ThemeProvider>
       <Router>
         <Routes>
-          {/* Public Routes */}
+
+          {/* HOME */}
           <Route
             path="/"
             element={
@@ -50,27 +39,31 @@ function App() {
                 <Navbar />
                 <Hero />
                 <AboutMe />
-                <ProjectSection projects={projects} />
+                <ProjectSection />
                 <Contact />
                 <Footer />
               </>
             }
           />
 
-          {/* Admin Login Route */}
-          <Route path="/login" element={<AdminLogin onLoginSuccess={handleLoginSuccess} />} />
-          
-          {/* Protected Admin Panel Route */}
+          {/* LOGIN */}
+          <Route
+            path="/login"
+            element={<AdminLogin onLoginSuccess={handleLoginSuccess} />}
+          />
+
+          {/* ADMIN */}
           <Route
             path="/admin"
             element={
-              <ProtectedRoute role="admin">
-                <Top1/>
-                <AddProject/>
-                <AdminContact/>
+              <ProtectedRoute>
+                <Top1 />
+                <AddProject />
+                <AdminContact />
               </ProtectedRoute>
             }
           />
+
         </Routes>
       </Router>
     </ThemeProvider>
