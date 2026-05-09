@@ -24,10 +24,9 @@ const AdminLogin = ({ onLoginSuccess }) => {
       onLoginSuccess();
 
     } catch (err) {
-
-      setError("Invalid Credentials!");
-
-    }
+  console.log(err.response?.data); // 👈 real backend error देखिन्छ
+  setError(err.response?.data?.message || "Login Failed");
+}
   };
 
   return (
