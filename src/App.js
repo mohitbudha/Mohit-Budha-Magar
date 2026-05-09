@@ -16,7 +16,7 @@ import AdminContact from "./Admin/adminContact";
 
 
 function App() {
-  const [projects, setProjects] = useState([]);
+  // const [projects, setProjects] = useState([]);
   const isLoggedIn = !!localStorage.getItem("token"); // Check token in localStorage
 
   // const handleProjectAdded = (newProject) => {
