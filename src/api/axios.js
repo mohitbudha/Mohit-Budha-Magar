@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://my-portfolio-backend-1-db8u.onrender.com/api"
+  baseURL: "https://my-portfolio-backend-1-93iz.onrender.com/api"
 });
 
 api.interceptors.request.use((config) => {
