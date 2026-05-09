@@ -19,19 +19,19 @@ function App() {
   const [projects, setProjects] = useState([]);
   const isLoggedIn = !!localStorage.getItem("token"); // Check token in localStorage
 
-  const handleProjectAdded = (newProject) => {
-    setProjects((prev) => [...prev, newProject]);
-  };
+  // const handleProjectAdded = (newProject) => {
+  //   setProjects((prev) => [...prev, newProject]);
+  // };
 
   const handleLoginSuccess = (token) => {
     localStorage.setItem("token", token);
     window.location.href = "/admin"; // Redirect after login
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/admin"; // Redirect to login page after logout
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   window.location.href = "/admin"; // Redirect to login page after logout
+  // };
 
   // ✅ Protected Route Wrapper
   const ProtectedRoute = ({ children }) => {
