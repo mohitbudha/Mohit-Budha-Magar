@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import AboutImg from "../Photos/I.png";
+import AboutImg from "../Photos/am.png";
 import htmlLogo from "../Photos/html.png";
 import cssLogo from "../Photos/css.png";
 import jsLogo from "../Photos/java.png";
@@ -14,28 +14,13 @@ const AboutMe = () => {
     >
       {/* Left Image with Animation */}
       <motion.div
-        className="flex-1 flex justify-center mb-8 md:mb-0"
+        className="flex-1 text-center md:text-left space-y-6 "
         initial={{ x: -100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: false, amount: 0.3 }}  // once=false to repeat animation
         transition={{ duration: 1, ease: "easeOut" }}
->
-        <img
-          src={AboutImg}
-          alt="About Me"
-          className="w-72 h-72 md:w-96 md:h-96 object-cover border-2 border-blue-500 rounded-lg shadow-lg"
-        />
-      </motion.div>
 
-      {/* Right Content with Animation */}
-      <motion.div
-        className="flex-1 text-center md:text-left space-y-6"
-        initial={{ x: 100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        viewport={{ once: false, amount: 0.3 }}  // once=false here also
-        transition={{ duration: 1, ease: "easeOut" }}
-      >
-        <h2 className="text-4xl md:text-5xl font-bold">
+>           <h2 className="text-4xl md:text-5xl font-bold">
           About <span className="text-blue-500">Me</span>
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto md:mx-0">
@@ -70,6 +55,23 @@ const AboutMe = () => {
             </div>
           ))}
         </div>
+       
+      </motion.div>
+
+      {/* Right Content with Animation */}
+      <motion.div
+        className="flex-1 flex justify-center mb-8 md:mb-0"
+        initial={{ x: 100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: false, amount: 0.3 }}  // once=false here also
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+     
+         <img
+          src={AboutImg}
+          alt="About Me"
+          className="w-68 h-68 md:w-96 md:h-96 object-cover border-2 border-blue-500 rounded-lg shadow-lg"
+        />
       </motion.div>
     </section>
   );

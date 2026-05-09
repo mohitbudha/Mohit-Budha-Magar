@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import I from "../Photos/I.png";
+import I from "../Photos/ma.png";
 
 const Hero = () => {
   const fadeInLeft = {

@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ThemeContext } from '../ThemeContext';
+import { useNavigate } from 'react-router-dom';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const Top = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Disable body scroll when menu is open
   useEffect(() => {
@@ -66,6 +68,13 @@ const Top = () => {
           >
             {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
           </button>
+
+           <button
+            onClick={() => navigate('/login')}
+            className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
+           >
+           Admin
+           </button>
 
           {/* Mobile Menu Button */}
           <button

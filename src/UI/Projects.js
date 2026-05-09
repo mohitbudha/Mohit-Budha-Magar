@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const ProjectSection = () => {
+
   const [projects, setProjects] = useState([]);
-  const [visibleProjects, setVisibleProjects] = useState(6); // initially show 6
+  const [visibleProjects, setVisibleProjects] = useState(6);
   const { ref, inView } = useInView({ threshold: 0.2 });
 
   useEffect(() => {
+
     const fetchProjects = async () => {
+
       try {
-        const res = await axios.get(
-          "https://my-portfolio-backend-1-db8u.onrender.com/api/projects"
-        );
+
+        const res = await api.get("/projects");
         setProjects(res.data);
+
       } catch (err) {
+
         console.error("Error fetching projects:", err);
+
       }
     };
+
     fetchProjects();
+
   }, []);
 
   const containerVariants = {
@@ -46,6 +53,7 @@ const ProjectSection = () => {
       ref={ref}
       className="px-6 md:px-16 py-16 md:py-24 bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
     >
+
       {/* Heading */}
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
@@ -63,24 +71,33 @@ const ProjectSection = () => {
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
       >
+
         {projects.length > 0 ? (
+
           projects.slice(0, visibleProjects).map((project, index) => (
+
             <motion.div
               key={index}
               className="bg-gray-100 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl"
               variants={cardVariants}
             >
+
               <img
                 src={project.img}
                 alt={project.title}
                 className="w-full h-48 object-cover"
               />
+
               <div className="p-6 space-y-3">
+
                 <h3 className="text-2xl font-bold">{project.title}</h3>
+
                 <p className="text-gray-600 dark:text-gray-300">
                   {project.description}
                 </p>
+
                 <div className="flex flex-wrap gap-2">
+
                   {project.tech.map((t, i) => (
                     <span
                       key={i}
@@ -89,7 +106,9 @@ const ProjectSection = () => {
                       {t}
                     </span>
                   ))}
+
                 </div>
+
                 <a
                   href={project.link}
                   target="_blank"
@@ -98,25 +117,37 @@ const ProjectSection = () => {
                 >
                   View Project
                 </a>
+
               </div>
+
             </motion.div>
+
           ))
+
         ) : (
-          <p className="text-center text-gray-500">No projects available.</p>
+
+          <p className="text-center text-gray-500">
+            No projects available.
+          </p>
+
         )}
+
       </motion.div>
 
       {/* Load More Button */}
       {visibleProjects < projects.length && (
         <div className="text-center mt-10">
+
           <button
             onClick={() => setVisibleProjects(visibleProjects + 3)}
             className="px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition"
           >
             Load More
           </button>
+
         </div>
       )}
+
     </section>
   );
 };
