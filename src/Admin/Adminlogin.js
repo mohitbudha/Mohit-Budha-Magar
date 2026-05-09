@@ -14,7 +14,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
     try {
 
       const res = await api.post("/auth/login", {
-        username,
+        login,
         password,
       });
 
