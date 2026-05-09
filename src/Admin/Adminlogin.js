@@ -3,7 +3,7 @@ import api from "../api/axios";
 
 const AdminLogin = ({ onLoginSuccess }) => {
 
-  const [username, setUsername] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -49,9 +49,9 @@ const AdminLogin = ({ onLoginSuccess }) => {
 
           <input
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username/email"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
           />
 
