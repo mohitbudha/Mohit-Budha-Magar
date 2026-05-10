@@ -23,7 +23,7 @@ const AdminPanel = () => {
       formData.append("link", link);
       formData.append("image", img);
 
-      await api.post("/projects/add", formData, {
+      await api.post("/projects", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
