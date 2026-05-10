@@ -20,6 +20,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      console.log("TOKEN:", res.data.token);
 
       onLoginSuccess();
 
