@@ -5,7 +5,7 @@ const AdminPanel = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tech, setTech] = useState("");
-  const [img, setImg] = useState(null);
+  const [image, setImg] = useState(null);
   const [link, setLink] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +21,7 @@ const AdminPanel = () => {
       formData.append("description", description);
       formData.append("tech", tech);
       formData.append("link", link);
-      formData.append("img", img);
+      formData.append("image", image);
 
       await api.post("/projects", formData, {
         headers: {
