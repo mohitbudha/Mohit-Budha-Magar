@@ -12,6 +12,7 @@ import AdminLogin from "./Admin/Adminlogin";
 import AddProject from "./Admin/addProject";
 import Top1 from "./Admin/adminTop";
 import AdminContact from "./Admin/adminContact";
+import AdminDashboard from "./Admin/AdminDashboard";
 
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <Top1 />
-                <AddProject />
+                <AdminDashboard/>
                 <AdminContact />
               </ProtectedRoute>
             }

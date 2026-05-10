@@ -17,6 +17,7 @@ const AdminPanel = () => {
       setLoading(true);
 
       const formData = new FormData();
+
       formData.append("title", title);
       formData.append("description", description);
       formData.append("tech", tech);
@@ -38,33 +39,101 @@ const AdminPanel = () => {
       setLink("");
 
     } catch (err) {
+
       console.log(err);
+
       setMessage("❌ Upload Failed");
+
     } finally {
+
       setLoading(false);
+
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleAddProject} className="space-y-4">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center px-4">
 
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+      <div className="w-full max-w-lg bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-8">
 
-        <input value={tech} onChange={(e) => setTech(e.target.value)} placeholder="React,Node" />
+        <h1 className="text-3xl font-bold text-center text-blue-500 mb-6">
+          Add Project
+        </h1>
 
-        <input type="file" onChange={(e) => setImg(e.target.files[0])} />
+        {message && (
+          <p className="text-center mb-4 font-semibold text-green-500">
+            {message}
+          </p>
+        )}
 
-        <input value={link} onChange={(e) => setLink(e.target.value)} placeholder="Project link" />
+        <form onSubmit={handleAddProject} className="space-y-5">
 
-        <button disabled={loading}>
-          {loading ? "Uploading..." : "Add Project"}
-        </button>
+          {/* Title */}
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Project Title"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-        <p>{message}</p>
+          {/* Description */}
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Project Description"
+            rows="4"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-      </form>
+          {/* Technology */}
+          <input
+            type="text"
+            value={tech}
+            onChange={(e) => setTech(e.target.value)}
+            placeholder="React, Node, MongoDB"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          {/* File Upload */}
+          <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-4 text-center">
+
+            <input
+              type="file"
+              onChange={(e) => setImg(e.target.files[0])}
+              className="w-full dark:text-white"
+            />
+
+            {image && (
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                {image.name}
+              </p>
+            )}
+
+          </div>
+
+          {/* Project Link */}
+          <input
+            type="text"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="https://yourproject.com"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          {/* Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-semibold transition duration-300 disabled:opacity-50"
+          >
+            {loading ? "Uploading..." : "Add Project"}
+          </button>
+
+        </form>
+
+      </div>
+
     </div>
   );
 };
