@@ -11,69 +11,30 @@ const AdminPanel = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔥 Upload Image To Cloudinary
-  const uploadImage = async () => {
-
-    const formData = new FormData();
-
-    formData.append("file", img);
-    formData.append("upload_preset", "portfolio_upload");
-
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    const data = await res.json();
-
-    return data.secure_url;
-  };
-
   // 🔥 Add Project
-  const handleAddProject = async (e) => {
+  export const addProject = async (req, res) => {
+  try {
+    const { title, description, tech, link } = req.body;
 
-    e.preventDefault();
+    const image = req.file ? `/uploads/${req.file.filename}` : "";
 
-    try {
+    const newProject = await Project.create({
+      title,
+      description,
+      tech: tech.split(","),
+      img: image,
+      link,
+    });
 
-      setLoading(true);
+    res.json({
+      success: true,
+      project: newProject,
+    });
 
-      // Upload image first
-      const imageUrl = await uploadImage();
-
-      // Save project
-      await api.post("/projects", {
-        title,
-        description,
-        tech: tech.split(","),
-        img: imageUrl,
-        link,
-      });
-
-      setMessage("✔ Project Added Successfully!");
-
-      // Clear form
-      setTitle("");
-      setDescription("");
-      setTech("");
-      setImg(null);
-      setLink("");
-
-    } catch (err) {
-
-      console.log(err);
-
-      setMessage("❌ Error adding project");
-
-    } finally {
-
-      setLoading(false);
-
-    }
-  };
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">

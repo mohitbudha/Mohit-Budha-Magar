@@ -10,14 +10,14 @@ const AdminLogin = ({ onLoginSuccess }) => {
   const handleLogin = async (e) => {
 
     e.preventDefault();
-
+    
     try {
 
       const res = await api.post("/auth/login", {
         username,
         password,
       });
-
+      console.log("RESPONSE:", res.data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       console.log("TOKEN:", res.data.token);
