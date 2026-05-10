@@ -21,7 +21,7 @@ const AdminPanel = () => {
       formData.append("description", description);
       formData.append("tech", tech);
       formData.append("link", link);
-      formData.append("image", img);
+      formData.append("img", img);
 
       await api.post("/projects", formData, {
         headers: {
